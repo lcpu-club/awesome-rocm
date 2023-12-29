@@ -1,0 +1,6 @@
+datasets
+transformers
+peft
+trl
+accelerate
+deepspeed
