@@ -1,5 +1,7 @@
 datasets
 transformers
+tensorboard
+spicy
 peft
 trl
 accelerate
