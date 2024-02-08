@@ -4,7 +4,7 @@ import time
 print(f"Current torch.version.hip: {torch.version.hip}")
 print(f"Device name: {torch.cuda.get_device_name()}")
 
-precision = input("Type the precision: ")
+precision = input("Type the precision: e.g. torch.float16")
 torch.set_default_dtype(eval(precision))
 
 def test_vector_add(n: int):
@@ -38,6 +38,6 @@ for n in range(1, 100):
         print(f"vector add with n = {n}")
         test_vector_add(n)
 
-for n in [2**k for k in range(0, 20)]:
+for n in [2**k for k in range(0, 16)]:
         print(f"matmul with n, m = 16384, k = {n}")
         test_matmul(16384, 16384, n)

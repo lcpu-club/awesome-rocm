@@ -23,7 +23,7 @@ The docker hub for ROCm is [rocm](https://hub.docker.com/u/rocm), you can find a
 - [Flash-Attention](https://github.com/ROCmSoftwarePlatform/flash-attention/tree/flash_attention_for_rocm)
 
 #### Inference
-- [FastLLM-ROCm](https://github.com/leavelet/fastllm-rocm/tree/master): A simple implementation of FastLLM on ROCm. Not optimized, but it is easy to maintain and modify.
+- [FastLLM-ROCm](https://github.com/lcpu-club/fastllm-rocm/tree/master): A simple implementation of FastLLM on ROCm. Not optimized, but it is easy to maintain and modify.
 - [VLLM](https://github.com/vllm-project/vllm): A high performance implementation of FastLLM on ROCm. It is optimized for performance. It have [AMD Installation Guide](https://docs.vllm.ai/en/latest/getting_started/amd-installation.html) and [Docker image](https://hub.docker.com/r/embeddedllminfo/vllm-rocm/tags) for MI GPUs.
 
 #### Training and Fine-tuning
