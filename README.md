@@ -1,6 +1,6 @@
-# ROCm tutorials
+# Awesome ROCm
 
-A collection of tutorials for using ROCm.
+A collection of userful information and tutorials for using ROCm.
 
 ## Collections
 
@@ -20,7 +20,7 @@ The docker hub for ROCm is [rocm](https://hub.docker.com/u/rocm), you can find a
 ### Useful Repositories
 
 - [HIPIFY](https://github.com/ROCm/HIPIFY): A tool to convert CUDA code to HIP code. You can use it to port your CUDA code to ROCm.
-- [Flash-Attention](https://github.com/ROCmSoftwarePlatform/flash-attention/tree/flash_attention_for_rocm)
+- [Flash-Attention](https://github.com/ROCm/flash-attention): Flash-Attention ported to ROCm. NAVI GPU support is in `howiejay/navi_support` branch.
 
 #### Inference
 - [FastLLM-ROCm](https://github.com/lcpu-club/fastllm-rocm/tree/master): A simple implementation of FastLLM on ROCm. Not optimized, but it is easy to maintain and modify.
