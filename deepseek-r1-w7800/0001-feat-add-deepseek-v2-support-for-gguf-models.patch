@@ -1,0 +1,67 @@
+From f081ebb72e1ebe66d4fca338cd95e96351569b16 Mon Sep 17 00:00:00 2001
+From: leavelet <leavelet@163.com>
+Date: Sun, 25 May 2025 10:34:23 +0000
+Subject: [PATCH 1/1] feat: add deepseek v2 support for gguf models
+
+---
+ src/transformers/integrations/ggml.py           | 17 +++++++++++++++++
+ src/transformers/modeling_gguf_pytorch_utils.py |  8 ++++++++
+ 2 files changed, 25 insertions(+)
+
+diff --git a/src/transformers/integrations/ggml.py b/src/transformers/integrations/ggml.py
+index 51bdc88608..a1ee6f2b95 100644
+--- a/src/transformers/integrations/ggml.py
++++ b/src/transformers/integrations/ggml.py
+@@ -90,6 +90,23 @@ GGUF_CONFIG_MAPPING = {
+         "expert_count": "num_experts",
+         "expert_used_count": "num_experts_per_tok",
+     },
++    "deepseek2": {
++        "context_length": "max_position_embeddings",
++        "block_count": "num_hidden_layers",
++        "feed_forward_length": "intermediate_size",
++        "embedding_length": "hidden_size",
++        "rope.dimension_count": "qk_rope_head_dim",
++        "rope.freq_base": "rope_theta",
++        "attention.head_count": "num_attention_heads",
++        "attention.head_count_kv": "num_key_value_heads",
++        "attention.layer_norm_rms_epsilon": "rms_norm_eps",
++        "attention.q_lora_rank": "q_lora_rank",
++        "attention.kv_lora_rank": "kv_lora_rank",
++        "vocab_size": "vocab_size",
++        "expert_count": "n_routed_experts",        
++        "expert_shared_count": "n_shared_experts",
++        "expert_used_count": "num_experts_per_tok",
++    },
+     "falcon": {
+         "context_length": "max_position_embeddings",
+         "block_count": "num_hidden_layers",
+diff --git a/src/transformers/modeling_gguf_pytorch_utils.py b/src/transformers/modeling_gguf_pytorch_utils.py
+index 3ce50f8fec..73f7cee246 100644
+--- a/src/transformers/modeling_gguf_pytorch_utils.py
++++ b/src/transformers/modeling_gguf_pytorch_utils.py
+@@ -295,6 +295,8 @@ def get_gguf_hf_weights_map(
+         model_type = "command-r"
+     elif model_type == "qwen2_moe":
+         model_type = "qwen2moe"
++    if model_type == "deepseek_v3":
++        model_type = "deepseek2"
+     elif model_type == "gemma3_text":
+         model_type = "gemma3"
+     arch = None
+@@ -391,6 +393,12 @@ def load_gguf_checkpoint(gguf_checkpoint_path, return_tensors=False, model_to_lo
+ 
+     if "qwen2moe" in architecture:
+         updated_architecture = "qwen2_moe"
++    
++    if "deepseek2" in architecture:
++        updated_architecture = "deepseek_v3"
++        parsed_parameters["config"]["topk_method"] = "noaux_tc"
++        parsed_parameters["config"]["moe_layer_freq"] = 1
++        parsed_parameters["config"]["scoring_func"] = "sigmoid"
+ 
+     # For stablelm architecture, we need to set qkv_bias and use_parallel_residual from tensors
+     # If `qkv_bias=True`, qkv_proj with bias will be present in the tensors
+-- 
+2.43.5
+
