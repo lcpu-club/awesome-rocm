@@ -78,6 +78,7 @@ git clone https://github.com/vllm-project/vllm.git
 cd /opt/rocm/share/amd_smi
 pip install .
 cd ${ROCM_VLLM_HOME}
+python use_existing_torch.py
 pip install --upgrade numba \
     scipy \
     huggingface-hub[cli,hf_transfer] \
@@ -85,7 +86,6 @@ pip install --upgrade numba \
 pip install "numpy<2"
 pip install -r requirements/rocm.txt
 export PYTORCH_ROCM_ARCH="gfx1100"
-python use_existing_torch.py
 python3 setup.py develop
 ```
 
