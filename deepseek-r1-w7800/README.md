@@ -65,6 +65,8 @@ pip3 install -e .
 flash-attention can be installed from source. Note, you should set `GPU_ARCHS` to your GPU architecture, which can be found in [AMD ROCm documentation](https://rocm.docs.amd.com/projects/install-on-linux/en/latest/reference/system-requirements.html). For W7800, W7900 or 7900XTX, it is `gfx1100`.
 
 ```bash
+git clone https://github.com/Dao-AILab/flash-attention.git
+cd flash-attention
 FLASH_ATTENTION_TRITON_AMD_ENABLE="TRUE" GPU_ARCHS="gfx1100" pip install -e .
 ```
 
@@ -73,7 +75,6 @@ FLASH_ATTENTION_TRITON_AMD_ENABLE="TRUE" GPU_ARCHS="gfx1100" pip install -e .
 ```bash
 export ROCM_VLLM_HOME=$(pwd)/vllm
 git clone https://github.com/vllm-project/vllm.git
-
 cd /opt/rocm/share/amd_smi
 pip install .
 cd ${ROCM_VLLM_HOME}
@@ -84,6 +85,7 @@ pip install --upgrade numba \
 pip install "numpy<2"
 pip install -r requirements/rocm.txt
 export PYTORCH_ROCM_ARCH="gfx1100"
+python use_existing_torch.py
 python3 setup.py develop
 ```
 
